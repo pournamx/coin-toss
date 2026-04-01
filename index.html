@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Coin Toss Game</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #a9c3d6;
+    }
+
+    .container {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .box {
+      background: #e6e6e6;
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+      width: 300px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .coin {
+      width: 100px;
+      height: 100px;
+      background: gold;
+      border-radius: 50%;
+      margin: 20px auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 80%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      border: 1px solid #999;
+      text-align: center;
+    }
+
+    button {
+      width: 85%;
+      padding: 10px;
+      background-color: #1c77a6;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #155d82;
+    }
+
+    .result {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="box">
+    <h2>Coin Toss 🪙</h2>
+
+    <div class="coin" id="coin">?</div>
+
+    <input type="text" id="guess" placeholder="Head or Tail">
+
+    <button type="button" onclick="toss()">Toss</button>
+
+    <div id="msg" class="result"></div>
+
+    <p id="stats">Rounds: 0 | Correct: 0</p>
+  </div>
+</div>
+
+<script>
+let rounds = 0;
+let correct = 0;
+
+function toss() {
+  const input = document.getElementById("guess");
+  const guess = input.value.trim().toLowerCase();
+
+  const coin = document.getElementById("coin");
+  const msg = document.getElementById("msg");
+  const stats = document.getElementById("stats");
+
+  if (guess !== "head" && guess !== "tail") {
+    msg.innerText = "Enter Head or Tail!";
+    return;
+  }
+
+  const result = Math.random() < 0.5 ? "head" : "tail";
+
+  coin.innerText = result === "head" ? "H" : "T";
+
+  rounds++;
+
+  if (guess === result) {
+    correct++;
+    msg.innerText = "✅ Correct!";
+  } else {
+    msg.innerText = "❌ Wrong!";
+  }
+
+  stats.innerText = `Rounds: ${rounds} | Correct: ${correct}`;
+}
+</script>
+
+</body>
+</html>
